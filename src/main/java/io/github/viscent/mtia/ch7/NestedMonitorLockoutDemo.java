@@ -67,7 +67,29 @@ public class NestedMonitorLockoutDemo {
           doProcess();
         }
       } catch (InterruptedException e) {
-        ;
+      }
+    }
+  }
+
+
+  /*
+  * 解决doProcess()方法死锁问题，但是带来新的问题，无法保证take()和processed++的2个操作的原子性
+  */
+  protected synchronized void doProcess1(String msg) throws InterruptedException {
+    // 不要在临界区内调用BlockingQueue的阻塞方法！那样会导致嵌套监视器锁死
+    processed++;
+    System.out.println("Process:" + msg);
+  }
+
+  class WorkerThread1 extends Thread {
+    @Override
+    public void run() {
+      try {
+        while (true) {
+          String msg = queue.take();
+          doProcess1(msg);
+        }
+      } catch (InterruptedException e) {
       }
     }
   }

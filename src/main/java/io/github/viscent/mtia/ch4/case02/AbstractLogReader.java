@@ -50,7 +50,7 @@ public abstract class AbstractLogReader extends Thread {
       throws InterruptedException;
 
   @Override
-  public void run() {
+  public void run(){
     RecordSet recordSet;
     boolean eof = false;
     try {

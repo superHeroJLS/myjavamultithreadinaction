@@ -27,14 +27,16 @@ public class ThreadMonitorDemo {
   final BlockingQueue<String> channel = new ArrayBlockingQueue<String>(100);
 
   public static void main(String[] args) throws InterruptedException {
-    ThreadMonitorDemo demo = new ThreadMonitorDemo();
-    demo.init();
-    for (int i = 0; i < 100; i++) {
-      demo.service("test-" + i);
-    }
 
-    Thread.sleep(2000);
-    System.exit(0);
+    System.out.println(Thread.currentThread().getThreadGroup().getClass().getCanonicalName());
+//    ThreadMonitorDemo demo = new ThreadMonitorDemo();
+//    demo.init();
+//    for (int i = 0; i < 100; i++) {
+//      demo.service("test-" + i);
+//    }
+//
+//    Thread.sleep(2000);
+//    System.exit(0);
   }
 
   public synchronized void init() {

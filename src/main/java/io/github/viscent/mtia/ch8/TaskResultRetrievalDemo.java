@@ -23,6 +23,12 @@ import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+/*
+下面看一个Future 接口使用的Demo 。该Demo 模拟从指定的车牌照片中识别出相应
+的车牌号（ 字符串）。这个识别的过程可能比较耗时，因此我们将这个识别任务封装为一
+个Callable 实例提交给专门的线程池执行，并在需要该任务的处理结果数据（车牌号码）
+时才调用Future.get()
+*/
 public class TaskResultRetrievalDemo {
   final static int N_CPU = Runtime.getRuntime().availableProcessors();
   final ThreadPoolExecutor executor = new ThreadPoolExecutor(0, N_CPU * 2, 4,
